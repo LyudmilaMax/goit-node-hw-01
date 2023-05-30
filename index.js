@@ -1,3 +1,5 @@
+const { program } = require("commander");
+
 const contactsService = require("./db/contacts");
 
 const invokeAction = async ({ action, id, name, email, phone }) => {
@@ -31,8 +33,21 @@ const invokeAction = async ({ action, id, name, email, phone }) => {
   }
 };
 
-//invokeAction({ action: "list" });
-//invokeAction({ action: "get", id: "AeHIrLTr6JkxGE6SN-0Rw" });
+program
+  .option("-a, --action <type>", "choose action")
+  .option("-i, --id <type>", "user id")
+  .option("-n, --name <type>", "user name")
+  .option("-e, --email <type>", "user email")
+  .option("-p, --phone <type>", "user phone");
+
+program.parse();
+
+const options = program.opts();
+console.log(options);
+invokeAction(options);
+
+// invokeAction({ action: "list" });
+//invokeAction({ action: "get", id: "qdggE76Jtbfd9eWJHrssH" });
 // invokeAction({
 //   action: "add",
 //   name: "Allen Raymond",
@@ -40,10 +55,10 @@ const invokeAction = async ({ action, id, name, email, phone }) => {
 //   phone: "(992) 914-3792",
 // });
 
-invokeAction({
-  action: "remove",
-  id: "AeHIrLTr6JkxGE6SN-0Rw",
-});
+// invokeAction({
+//   action: "remove",
+//   id: "AeHIrLTr6JkxGE6SN-0Rw",
+// });
 
 // const { Command } = require("commander");
 // const program = new Command();
@@ -85,5 +100,5 @@ invokeAction({
 // }
 
 // invokeAction(argv);
-//invokeAction({ action: "list" });
-//invokeAction({ action: "getContactById", id: "AeHIrLTr6JkxGE6SN-0Rw" });
+// invokeAction({ action: "list" });
+// invokeAction({ action: "get", id: "qdggE76Jtbfd9eWJHrssH" });
